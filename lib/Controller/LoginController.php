@@ -348,7 +348,7 @@ class LoginController extends Controller {
 
 		$discovery = $this->discoveryService->obtainDiscovery($provider);
 
-		$this->logger->debug('Obtainting data from: ' . $discovery['token_endpoint']);
+		$this->logger->debug('Obtaining data from: ' . $discovery['token_endpoint']);
 
 		$client = $this->clientService->newClient();
 		$result = $client->post(

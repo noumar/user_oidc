@@ -88,7 +88,7 @@ class DiscoveryService {
 			$this->providerService->setSetting($provider->getId(), ProviderService::SETTING_JWKS_CACHE_TIMESTAMP, strval(time()));
 		}
 
-		$this->logger->debug('Parsed the jwks');
+		$this->logger->debug('Parsed the JWKs');
 		return $jwks;
 	}
 
