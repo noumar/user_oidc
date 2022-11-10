@@ -466,6 +466,7 @@ class LoginController extends Controller {
 			$this->userManager->search($userId);
 			$this->ldapService->syncUser($userId);
 			// when auto provision is disabled, we assume the user has been created by another user backend (or manually)
+			$userId = $this->ldapService->mapLoginName2UserName($userId);
 			$user = $this->userManager->get($userId);
 			if (is_null($user) || $this->ldapService->isLdapDeletedUser($user)) {
 				$this->logger->warning("Won't provision user: " . $userId);

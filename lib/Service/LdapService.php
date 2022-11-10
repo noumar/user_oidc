@@ -88,4 +88,22 @@ class LdapService {
 			$this->logger->debug('\OCA\User_LDAP\User_Proxy class not found');
 		}
 	}
+
+	/**
+	 * @param string $userId
+	 * @return string
+	 */
+	public function mapLoginName2UserName(string $userId): string {
+		try {
+			$proxy = \OC::$server->get(\OCA\User_LDAP\User_Proxy::class);
+			$mappedUserId = $proxy->loginName2UserName($userId);
+			if ($mappedUserId !== false && $mappedUserId !== $userId) {
+				$userId = $mappedUserId;
+			}
+		} catch (QueryException $e) {
+			$this->logger->debug($e->getMessage());
+		} finally {
+			return $userId;
+		}
+	}
 }
