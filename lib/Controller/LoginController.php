@@ -371,6 +371,9 @@ class LoginController extends Controller {
 		// TODO: proper error handling
 		$idTokenRaw = $data['id_token'];
 		$jwks = $this->discoveryService->obtainJWK($provider);
+		if (count($jwks) == 1) {
+			$jwks = $jwks[0];
+		}
 		JWT::$leeway = 60;
 		$idTokenPayload = JWT::decode($idTokenRaw, $jwks, array_keys(JWT::$supported_algs));
 
