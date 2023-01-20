@@ -473,6 +473,8 @@ class LoginController extends Controller {
 				return null;
 			}
 			$this->logger->debug('User obtained from other user backend: ' . $user->getUID());
+			// Set last-password-confirm at login, because user might not have a password (e.g. in LDAP).
+			$this->session->set('last-password-confirm', strtotime("+12 hour"));
 			return $user;
 		}
 
